@@ -1,39 +1,24 @@
 import React    from 'react';
 import ReactDOM from 'react-dom';
-import { combineReducers, createStore } from 'redux';
 
+import store    from './assets/store';
 import TodoList from './components/TodoList';
+import AddTodo  from './components/AddTodo';
 
-const todos = (state = [], action) => {
-  switch(action.type) {
-    case 'ADD_TODO':
-      return [...state, { id: action.id, text: action.text, completed: false }];
-    case 'REMOVE_TODO':
-      return state.filter(todo => todo.id !== action.id)
-    case 'TOGGLE_TODO':
-      return state.map(todo => {
-        if(todo.id !== action.id) return todo;
-        todo.completed = !todo.completed;
-        return todo;
-      });
-  }
-}
-
-// const visibilityFilter = (state = 'SHOW_ALL', action) => {
-//   switch(action.type) {
-//     case 'SET_VISIBILITY_FILTER':
-//       return action.visibilityFilter
-//   }
-// }
-
-const store = createStore(todos);
+store.initStore();
 
 class App extends React.Component {
   render() {
     return(
       <main>
         <h1>React Redux Todo App</h1>
-        <TodoList />
+        <AddTodo 
+          store={store}
+        />
+        <TodoList
+          store={store}
+          todos={ store.getStore().getState() }
+        />
       </main>
     );
   }
@@ -46,7 +31,7 @@ function render() {
   );
 }
 
-store.subscribe(render);
+store.getStore().subscribe(render);
 render();
 
 
