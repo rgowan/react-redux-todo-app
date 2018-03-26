@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
 const todos = (state = [], action) => {
   switch(action.type) {
@@ -26,18 +26,4 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
   }
 }
 
-let store = {};
-
-function initStore() {
-  const rootReducer = combineReducers({ todos, visibilityFilter });
-  store = createStore(rootReducer);
-}
-
-function getStore() {
-  return store
-}
-
-export default {
-  initStore,
-  getStore
-}
+  export default combineReducers({ todos, visibilityFilter });

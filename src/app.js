@@ -1,29 +1,30 @@
 import React    from 'react';
 import ReactDOM from 'react-dom';
 
-import store    from './assets/storeHelper';
+import { createStore } from 'redux';
+import { Provider }    from 'react-redux';
+
+import reducers from './assets/reducers';
 import TodoList from './components/TodoList';
 import AddTodo  from './components/AddTodo';
 
-store.initStore();
-
-const App = () =>  (
-  <main>
-    <h1>React Redux Todo App</h1>
-    <AddTodo />
-    <TodoList />
-  </main>
-);
-
-function render() {
-  ReactDOM.render(
-    <App />,
-    document.getElementById('root')
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <main>
+        <h1>React Redux Todo App</h1>
+        <AddTodo />
+        <TodoList />
+      </main>
+    );
+  }
 }
 
-store.getStore().subscribe(render);
-render();
-
+ReactDOM.render(
+  <Provider store={createStore(reducers)}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
 
 

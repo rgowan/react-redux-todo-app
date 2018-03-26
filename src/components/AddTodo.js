@@ -1,27 +1,26 @@
 import React from 'react';
-import store from '../assets/storeHelper';
+import { connect } from 'react-redux';
 
-let globalId = 0;
-let input;
 
-const AddTodo = () => (
-  <form
-    onSubmit={ (e) => {
-        e.preventDefault();
-        store.getStore().dispatch({ type: 'ADD_TODO', text: input.value, id: globalId++ });
-        input.value = '';
-      }
-    }
-  >
-    <input
-      type="text"
-      ref={node => input = node}
-    />
-    <input
-      type="submit"
-      value="Add Todo"
-    />
-  </form>
-);
+class AddTodo extends React.Component {
+  render() { 
+    const { dispatch } = this.props;
+    let globalId = 0;
+    
+    return (
+      <form
+        onSubmit={ (e) => {
+            e.preventDefault();
+            dispatch({ type: 'ADD_TODO', text: this.input.value, id: globalId++ });
+            this.input.value = '';
+          }
+        }
+      >
+        <input type="text" ref={node => this.input = node} />
+        <input type="submit" value="Add Todo" />
+      </form>      
+    );
+  }
+}
 
-export default AddTodo;
+export default connect()(AddTodo);
