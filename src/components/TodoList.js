@@ -26,7 +26,7 @@ class TodoList extends Component {
 
     return(
       <Fragment>
-        <p>You have { todos.filter(todo => !todo.completed).length } todos left to do.</p>
+        <p>You have { todos.filter(todo => !todo.completed).length } todos, remaining to do.</p>
 
         <ul>
           { todos.map(todo => 

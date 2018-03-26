@@ -11,7 +11,7 @@ class AddTodo extends Component {
       <form
         onSubmit={ (e) => {
             e.preventDefault();
-            dispatch({ type: 'ADD_TODO', text: this.input.value, id: globalId++ });
+            if(this.input.value !== '') dispatch({ type: 'ADD_TODO', text: this.input.value, id: globalId++ });
             this.input.value = '';
           }
         }
