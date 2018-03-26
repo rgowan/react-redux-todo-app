@@ -1,21 +1,24 @@
 import React from 'react';
-import store from '../assets/store';
+import store from '../assets/storeHelper';
 
 const Todo = ({
   text,
   completed,
-  id
+  id,
+  removeTodo,
+  toggleTodoCompleted
 }) => (
   <li>
     <span
-      onClick={ () => store.getStore().dispatch({ type: 'TOGGLE_TODO', id }) }
-      style={ {textDecoration: completed ? 'line-through': 'none' } }
+      onClick={() => toggleTodoCompleted(id)}
+      style={ { textDecoration: completed ? 'line-through': 'none' } }
     >
       {text}
     </span>
     {' '}
     <button 
-      onClick={ () => store.getStore().dispatch({ type: 'REMOVE_TODO', id }) }
+      onClick={() => removeTodo(id)}
+      value="Delete"
     >
       Delete
     </button>

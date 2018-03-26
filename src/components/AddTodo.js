@@ -1,5 +1,5 @@
 import React from 'react';
-import store from '../assets/store';
+import store from '../assets/storeHelper';
 
 let globalId = 0;
 let input;

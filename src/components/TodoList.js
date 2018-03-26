@@ -1,15 +1,24 @@
 import React from 'react';
 
-import Todo from './Todo';
+import store from '../assets/storeHelper';
+import Todo  from './Todo';
 
-const TodosList = ({
-  todos
-}) => (
+const removeTodo = (id) => {
+  return store.getStore().dispatch({ type: 'REMOVE_TODO', id });
+}
+
+const toggleTodoCompleted = (id) => {
+  return store.getStore().dispatch({ type: 'TOGGLE_TODO', id });
+}
+
+const TodosList = () => (
   <ul>
-    { todos.map(todo => 
+    { store.getStore().getState().map(todo => 
       <Todo 
-        key={todo.id} 
+        key={todo.id}
         {...todo}
+        removeTodo={removeTodo}
+        toggleTodoCompleted={toggleTodoCompleted}
       />
     )}
   </ul>
