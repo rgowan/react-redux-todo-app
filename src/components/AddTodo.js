@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
-class AddTodo extends React.Component {
+class AddTodo extends Component {
   render() { 
     const { dispatch } = this.props;
     let globalId = 0;

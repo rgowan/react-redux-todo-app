@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Todo from './Todo';
@@ -20,21 +20,25 @@ const mapDispatchToProps = (
   }
 }
 
-class TodoList extends React.Component {
+class TodoList extends Component {
   render() {
     const { todos, toggleTodoCompleted, deleteTodo } = this.props;
 
     return(
-      <ul>
-        { todos.map(todo => 
-          <Todo 
-            key={todo.id}
-            {...todo}
-            toggleTodoCompleted={toggleTodoCompleted}
-            deleteTodo={deleteTodo}
-          />
-        )}
-      </ul>
+      <Fragment>
+        <p>You have { todos.filter(todo => !todo.completed).length } todos left to do.</p>
+
+        <ul>
+          { todos.map(todo => 
+            <Todo 
+              key={todo.id}
+              {...todo}
+              toggleTodoCompleted={toggleTodoCompleted}
+              deleteTodo={deleteTodo}
+            />
+          )}
+        </ul>
+      </Fragment>
     );
   }
 }
